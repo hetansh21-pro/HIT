@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #FFFFFF;
+    color: #0F172A;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+/* Card hover soft shadows matching the mockup */
+.hit-card-shadow {
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+}
+
+.hit-card-shadow:hover {
+  box-shadow: 0 12px 28px -4px rgba(255, 30, 66, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8FAFC;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF1E42;
+}
+
+/* Smooth page and element transition animations */
+@keyframes screenEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes contentSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalBackdrop {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes modalContent {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes cardStagger {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-screen-enter {
+  animation: screenEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-content-slide {
+  animation: contentSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-modal-backdrop {
+  animation: modalBackdrop 0.25s ease-out both;
+}
+
+.animate-modal-content {
+  animation: modalContent 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-card-stagger {
+  animation: cardStagger 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Home Page Hero Geometric Shapes Intro (Full screen scale ➔ Glide to sides) */
+@keyframes yellowShapeIntro {
+  0% {
+    opacity: 0.95;
+    transform: translate(26vw, 16vh) scale(3.2) rotate(-10deg);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(16vw, 10vh) scale(2.2) rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes redShapeIntro {
+  0% {
+    opacity: 0.95;
+    transform: translate(-26vw, -16vh) scale(3.2) rotate(55deg);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-14vw, -8vh) scale(2.0) rotate(46deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(36%, 0) scale(1) rotate(38deg);
+  }
+}
+
+.animate-yellow-shape-intro {
+  transform-origin: top left;
+  animation: yellowShapeIntro 1.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-red-shape-intro {
+  transform-origin: center center;
+  animation: redShapeIntro 1.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Home Page Hand-Drawn SVG Sketch Animations (Live Drawing Effect) */
+@keyframes drawStrokeLoop {
+  0% {
+    stroke-dashoffset: 105;
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+.animate-draw-circle {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 105;
+  animation: drawStrokeLoop 1.2s cubic-bezier(0.45, 0, 0.25, 1) 0.8s forwards;
+}
+
+.animate-draw-underline {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 105;
+  animation: drawStrokeLoop 0.9s cubic-bezier(0.45, 0, 0.25, 1) 1.5s forwards;
+}
+
+.animate-draw-arrow {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 105;
+  animation: drawStrokeLoop 0.7s cubic-bezier(0.45, 0, 0.25, 1) 1.9s forwards;
+}
+
+/* Center Logo Reveal */
+@keyframes logoReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-logo-reveal {
+  animation: logoReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}

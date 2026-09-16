@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 607 444">
+  <!-- H -->
+  <path d="M 0 0 H 82 V 165 H 126 V 0 H 208 V 444 H 126 V 231 H 82 V 444 H 0 Z" fill="#FE1743"/>
+  <!-- I Yellow Top -->
+  <path d="M 270 0 H 351 V 95 L 270 55 Z" fill="#EEFF41"/>
+  <!-- I Red Bottom -->
+  <path d="M 270 118 L 351 158 V 444 H 270 Z" fill="#FE1743"/>
+  <!-- T -->
+  <path d="M 410 0 H 607 V 67 H 548 V 444 H 467 V 67 H 410 Z" fill="#FE1743"/>
+</svg>
