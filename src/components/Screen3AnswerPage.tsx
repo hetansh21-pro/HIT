@@ -517,12 +517,6 @@ const WhatHitDoesPage: React.FC<{ onOpenAudit: () => void; onWhatsApp: () => voi
       {/* 3. Who Is This Built For? Targeted Industry Match */}
       <div className="bg-white border-2 border-slate-200 rounded-3xl p-5 sm:p-7 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-100 text-slate-700">
-              TARGET AUDIENCE
-            </span>
-            <span className="text-xs font-bold text-[#FF1E42]">10–30 Year Old Established Businesses</span>
-          </div>
           <h4 className="font-black text-slate-900 text-lg sm:text-xl tracking-tight">
             Built for traditional businesses running on real daily operations.
           </h4>
