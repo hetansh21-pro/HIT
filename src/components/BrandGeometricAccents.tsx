@@ -12,7 +12,7 @@ export const BrandGeometricAccents: React.FC<BrandGeometricAccentsProps> = ({
   animateIntro = false,
 }) => {
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 select-none">
       {/* 1. Left Neon-Yellow Polygon (Matching media_1789568764761.png in Top Half) */}
       <div
         className={`absolute left-0 top-16 sm:top-20 w-28 sm:w-40 md:w-48 pointer-events-none ${
