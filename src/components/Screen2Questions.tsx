@@ -50,13 +50,13 @@ export const Screen2Questions: React.FC<Screen2QuestionsProps> = ({
   };
 
   return (
-    <div className="relative min-h-screen bg-white text-slate-900 flex flex-col justify-between overflow-x-hidden animate-fade-in">
+    <div className="relative min-h-[100dvh] bg-white text-slate-900 flex flex-col justify-between overflow-x-hidden animate-fade-in">
       {/* Exact Brand Shapes from User's Reference Images */}
       <BrandGeometricAccents />
 
       {/* Header */}
-      <header className="relative z-20 w-full max-w-5xl mx-auto px-6 pt-6 sm:pt-8 flex items-center justify-between">
-        {/* Left: HiT Logo + Back to Screen 1 button */}
+      <header className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-4 sm:pt-8 flex items-center justify-between">
+        {/* Left: HiT Logo */}
         <div className="flex items-center gap-3">
           <button
             onClick={() => {
@@ -67,18 +67,6 @@ export const Screen2Questions: React.FC<Screen2QuestionsProps> = ({
             title="Click to view fullscreen HIT logo"
           >
             <HitLogo size="sm" />
-          </button>
-
-          <button
-            onClick={() => {
-              sound.playClick();
-              onBackToScreen1();
-            }}
-            className="flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-[#FF1E42] bg-slate-50 hover:bg-red-50 border border-slate-200 px-3 py-1.5 rounded-xl transition-all cursor-pointer shadow-xs group"
-            title="Go back to full logo screen"
-          >
-            <ArrowLeft className="w-4 h-4 text-[#FF1E42] group-hover:-translate-x-0.5 transition-transform" />
-            <span>Back to Logo</span>
           </button>
         </div>
 
@@ -95,16 +83,11 @@ export const Screen2Questions: React.FC<Screen2QuestionsProps> = ({
               <VolumeX className="w-4 h-4" />
             )}
           </button>
-
-          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-slate-200 bg-white shadow-xs text-xs font-medium text-slate-700">
-            <span className="w-2 h-2 rounded-full bg-[#FF1E42] animate-pulse"></span>
-            <span>AI Automation</span>
-          </div>
         </div>
       </header>
 
       {/* Main Questions Content */}
-      <main className="relative z-10 w-full max-w-5xl mx-auto px-5 sm:px-8 py-10 sm:py-16 my-auto">
+      <main className="relative z-10 w-full max-w-5xl mx-auto px-5 sm:px-8 py-8 sm:py-16 my-auto">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
           <div>
@@ -116,7 +99,7 @@ export const Screen2Questions: React.FC<Screen2QuestionsProps> = ({
             </h2>
           </div>
 
-          {/* Handwritten Annotation & Curved Arrow - Enlarged for readability */}
+          {/* Handwritten Annotation & Curved Arrow - Previous clean 2-line styling */}
           <div className="flex items-center gap-2.5 self-end sm:self-auto text-slate-600 font-hand text-xl sm:text-2xl font-semibold select-none">
             <div className="text-right leading-tight">
               <span>Tap on a question</span>
@@ -127,7 +110,7 @@ export const Screen2Questions: React.FC<Screen2QuestionsProps> = ({
             <svg
               viewBox="0 0 32 32"
               fill="none"
-              className="w-8 h-8 text-[#FF1E42] stroke-current -rotate-12 translate-y-1"
+              className="w-8 h-8 text-[#FF1E42] stroke-current -rotate-12 translate-y-1 shrink-0"
             >
               <path
                 d="M 6 4 C 18 6, 24 16, 20 26 M 15 22 L 20 26 L 25 21"
@@ -152,7 +135,7 @@ export const Screen2Questions: React.FC<Screen2QuestionsProps> = ({
               className="animate-card-stagger group bg-white border border-slate-200/80 hover:border-slate-400/80 rounded-2xl p-4 sm:p-5 flex items-center justify-between transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl active:scale-[0.98] hit-card-shadow cursor-pointer text-left"
             >
               <div className="flex items-center gap-3.5">
-                <div className="p-1 rounded-lg">
+                <div className="p-1 rounded-lg shrink-0">
                   {getQuestionIcon(q.icon)}
                 </div>
                 <span className="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-[#FF1E42] transition-colors">
@@ -167,23 +150,23 @@ export const Screen2Questions: React.FC<Screen2QuestionsProps> = ({
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 w-full max-w-5xl mx-auto px-6 pb-8">
+      <footer className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 pb-6 sm:pb-8">
         {/* Divider with Centered Category Text */}
-        <div className="relative flex items-center justify-center my-6">
+        <div className="relative flex items-center justify-center my-4 sm:my-6">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-slate-100"></div>
           </div>
-          <span className="relative bg-white px-4 text-[10px] sm:text-[11px] font-mono tracking-widest text-slate-400 uppercase">
+          <span className="relative bg-white px-3 sm:px-4 text-[9px] sm:text-[11px] font-mono tracking-widest text-slate-400 uppercase text-center">
             AI &nbsp;/&nbsp; AUTOMATION &nbsp;/&nbsp; SOLUTIONS
           </span>
         </div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 pt-2">
+        <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 pt-1 sm:pt-2 text-center sm:text-left">
           <div className="flex items-center gap-2">
             <span className="font-bold text-[#FF1E42]">HiT</span>
             <span className="text-slate-300">|</span>
-            <span className="text-slate-500 font-medium">
+            <span className="text-slate-500 font-medium text-[11px] sm:text-xs">
               Smart Automation for a Better Tomorrow.
             </span>
           </div>
@@ -194,7 +177,7 @@ export const Screen2Questions: React.FC<Screen2QuestionsProps> = ({
                 sound.playClick();
                 onBackToScreen1();
               }}
-              className="text-xs text-slate-500 hover:text-[#FF1E42] font-semibold transition-colors flex items-center gap-1 cursor-pointer"
+              className="text-xs text-slate-500 hover:text-[#FF1E42] font-semibold transition-colors flex items-center gap-1 cursor-pointer py-1"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back to Logo Screen</span>

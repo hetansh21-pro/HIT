@@ -35,7 +35,7 @@ export const AnswerModal: React.FC<AnswerModalProps> = ({ question, onClose, onO
               {question.icon === 'rocket' && <Rocket className="w-6 h-6" />}
             </div>
             <div>
-              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#FF1E42]">
+              <span className="text-[11px] font-mono font-medium uppercase tracking-wider text-slate-400">
                 Question 0{question.number} • {question.subtitle}
               </span>
               <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">

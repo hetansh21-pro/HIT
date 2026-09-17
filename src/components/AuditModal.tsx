@@ -53,12 +53,12 @@ export const AuditModal: React.FC<AuditModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/65 backdrop-blur-md animate-modal-backdrop">
-      <div className="relative w-full max-w-lg bg-white border-2 border-slate-200 rounded-3xl p-6 sm:p-8 shadow-2xl text-slate-900 overflow-hidden animate-modal-content">
+      <div className="relative w-full max-w-lg max-h-[92dvh] overflow-y-auto bg-white border-2 border-slate-200 rounded-3xl p-5 sm:p-8 shadow-2xl text-slate-900 animate-modal-content">
         {/* Brand Theme Top Geometric Accent Bar */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-linear-to-r from-[#FE1743] via-[#EEFF41] to-[#FE1743]" />
+        <div className="sticky top-0 -mt-5 sm:-mt-8 -mx-5 sm:-mx-8 h-1.5 bg-gradient-to-r from-[#FE1743] via-[#EEFF41] to-[#FE1743] z-10" />
 
         {/* Header Bar */}
-        <div className="flex items-center justify-between pb-3.5 border-b border-slate-100">
+        <div className="flex items-center justify-between pb-3.5 pt-2 border-b border-slate-100">
           <div className="flex items-center gap-2.5">
             <HitLogo size="xs" />
             <span className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest font-black px-2.5 py-1 rounded-full bg-[#EEFF41] text-slate-900 border border-black/10 shadow-2xs">
@@ -112,7 +112,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({ isOpen, onClose }) => {
             </div>
 
             {/* "The Rule" Callout - Clear, readable text */}
-            <div className="relative bg-[#EEFF41]/20 border-2 border-[#EEFF41] rounded-2xl p-4 mb-4 shadow-2xs">
+            <div className="relative bg-yellow-50 border-2 border-yellow-300 rounded-2xl p-4 mb-4 shadow-2xs">
               <div className="flex items-start gap-3">
                 <div className="w-7 h-7 rounded-lg bg-[#FE1743] text-white flex items-center justify-center shrink-0 font-mono text-xs font-black shadow-xs">
                   !
@@ -126,7 +126,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({ isOpen, onClose }) => {
                   </p>
                 </div>
               </div>
-              <div className="mt-2.5 pt-2 border-t border-[#EEFF41]/70 flex items-center justify-between text-xs text-slate-700">
+              <div className="mt-2.5 pt-2 border-t border-yellow-200 flex items-center justify-between text-xs text-slate-700">
                 <span className="font-['Caveat'] text-[#FE1743] font-bold text-base">
                   Ground reality, zero technical jargon ✍️
                 </span>

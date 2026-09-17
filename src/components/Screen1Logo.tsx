@@ -43,7 +43,7 @@ export const Screen1Logo: React.FC<Screen1LogoProps> = ({
   return (
     <div
       onClick={handleTransition}
-      className="relative min-h-screen h-screen w-full flex flex-col justify-between items-center px-6 py-8 bg-white cursor-pointer select-none overflow-hidden transition-all duration-700"
+      className="relative min-h-[100dvh] h-[100dvh] w-full flex flex-col justify-between items-center px-4 sm:px-6 py-5 sm:py-8 bg-white cursor-pointer select-none overflow-hidden transition-all duration-700"
     >
       {/* Exact Brand Shapes from User's Reference Images - Animated from full screen to sides */}
       <BrandGeometricAccents animateIntro={true} />
@@ -53,19 +53,19 @@ export const Screen1Logo: React.FC<Screen1LogoProps> = ({
         {/* Subtle Brand Tag */}
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-[#FF1E42] animate-pulse"></span>
-          <span className="text-xs font-mono font-bold uppercase tracking-widest text-slate-400">
-            HiT AI SYSTEMS
+          <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider sm:tracking-widest text-slate-400">
+            HiT • PROCESS AUTOMATION
           </span>
         </div>
 
-        {/* Top Right: Sound & AI Automation Badge */}
+        {/* Top Right: Sound */}
         <div className="flex items-center gap-3">
           <button
             onClick={(e) => {
               e.stopPropagation();
               onToggleSound();
             }}
-            className="p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+            className="p-2 sm:p-2.5 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
             title={soundEnabled ? 'Mute sound' : 'Unmute sound'}
           >
             {soundEnabled ? (
@@ -74,23 +74,18 @@ export const Screen1Logo: React.FC<Screen1LogoProps> = ({
               <VolumeX className="w-4 h-4" />
             )}
           </button>
-
-          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-slate-200 bg-white shadow-xs text-xs font-medium text-slate-700">
-            <span className="w-2 h-2 rounded-full bg-[#FF1E42] animate-pulse"></span>
-            <span>AI Automation</span>
-          </div>
         </div>
       </div>
 
       {/* Screen 1 Center: Giant Full-Screen HIT Logo & Tagline with Reveal Animation */}
-      <div className="relative z-10 my-auto flex flex-col items-center text-center px-4 max-w-3xl animate-logo-reveal">
+      <div className="relative z-10 my-auto flex flex-col items-center text-center px-2 sm:px-4 max-w-3xl animate-logo-reveal">
         {/* Giant Fullscreen HIT Logo */}
         <div className="mb-6 sm:mb-10 transition-transform duration-500 transform hover:scale-105">
           <HitLogo size="hero" />
         </div>
 
         {/* Tagline */}
-        <h1 className="text-2xl sm:text-4xl md:text-5xl font-normal tracking-tight text-slate-800 leading-tight mb-8 sm:mb-12 font-sans">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-normal tracking-tight text-slate-800 leading-tight mb-8 sm:mb-12 font-sans max-w-xl">
           We make work feel{' '}
           <span className="font-extrabold text-[#FF1E42]">
             automated
@@ -132,7 +127,7 @@ export const Screen1Logo: React.FC<Screen1LogoProps> = ({
             <svg
               viewBox="0 0 48 24"
               fill="none"
-              className="w-10 sm:w-14 h-6 sm:h-8 stroke-[#FF1E42] group-hover:translate-x-2.5 transition-transform duration-300 ease-out"
+              className="w-10 sm:w-14 h-6 sm:h-8 stroke-[#FF1E42] group-hover:translate-x-2.5 transition-transform duration-300 ease-out shrink-0"
             >
               <path
                 d="M 4 12 C 16 11, 28 13, 42 12 M 32 4 C 36 8, 40 11, 44 12 C 40 13, 36 16, 32 20"

@@ -15,7 +15,7 @@ export const BrandGeometricAccents: React.FC<BrandGeometricAccentsProps> = ({
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
       {/* 1. Left Neon-Yellow Polygon (Matching media_1789568764761.png in Top Half) */}
       <div
-        className={`absolute left-0 top-16 sm:top-20 w-28 sm:w-40 md:w-48 ${
+        className={`absolute left-0 top-16 sm:top-20 w-28 sm:w-40 md:w-48 pointer-events-none ${
           animateIntro ? 'animate-yellow-shape-intro' : ''
         }`}
       >
@@ -34,7 +34,7 @@ export const BrandGeometricAccents: React.FC<BrandGeometricAccentsProps> = ({
 
       {/* 2. Right Red Tilted Square / Diamond (Matching media_1789568773550.png) */}
       <div
-        className={`absolute right-0 top-[340px] sm:top-[380px] w-36 h-36 sm:w-56 sm:h-56 translate-x-[36%] rotate-[38deg] bg-[#FE1743] ${
+        className={`absolute right-0 top-[340px] sm:top-[380px] w-36 h-36 sm:w-56 sm:h-56 translate-x-[36%] rotate-[38deg] bg-[#FE1743] pointer-events-none ${
           animateIntro ? 'animate-red-shape-intro' : ''
         }`}
         style={{
