@@ -440,12 +440,12 @@ const WhatHitDoesPage: React.FC<{ onOpenAudit: () => void; onWhatsApp: () => voi
         {/* Left: What We Do NOT Say */}
         <div className="bg-red-50 border-2 border-red-200/80 rounded-3xl p-5 sm:p-6 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <span className="text-xs font-mono font-black text-red-600 uppercase tracking-wider flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-red-500"></span>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+              <span className="text-xs font-mono font-black text-red-600 uppercase tracking-wider flex items-center gap-1.5 whitespace-nowrap">
+                <span className="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>
                 WHAT WE NEVER DO
               </span>
-              <span className="text-[10px] font-mono uppercase bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold">
+              <span className="w-fit text-[10px] font-mono uppercase bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold whitespace-nowrap shrink-0">
                 Zero Fluff
               </span>
             </div>
@@ -478,12 +478,12 @@ const WhatHitDoesPage: React.FC<{ onOpenAudit: () => void; onWhatsApp: () => voi
         {/* Right: What We Actually Deliver */}
         <div className="bg-emerald-50 border-2 border-emerald-200/80 rounded-3xl p-5 sm:p-6 flex flex-col justify-between shadow-xs">
           <div>
-            <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <span className="text-xs font-mono font-black text-emerald-800 uppercase tracking-wider flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+              <span className="text-xs font-mono font-black text-emerald-800 uppercase tracking-wider flex items-center gap-1.5 whitespace-nowrap">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
                 WHAT WE ACTUALLY DELIVER
               </span>
-              <span className="text-[10px] font-mono uppercase bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">
+              <span className="w-fit text-[10px] font-mono uppercase bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold whitespace-nowrap shrink-0">
                 Proven ROI
               </span>
             </div>
@@ -933,12 +933,12 @@ const HowAutomationHelpsPage: React.FC<{ onOpenAudit?: () => void }> = () => {
         {/* Left: The Manual Drag */}
         <div className="bg-red-50 border-2 border-red-200/80 rounded-3xl p-5 sm:p-6 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono font-black text-red-600 uppercase tracking-wider flex items-center gap-1.5">
-                <Timer className="w-4 h-4 text-red-500" />
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-3">
+              <span className="text-xs font-mono font-black text-red-600 uppercase tracking-wider flex items-center gap-1.5 whitespace-nowrap">
+                <Timer className="w-4 h-4 text-red-500 shrink-0" />
                 THE OLD MANUAL WAY
               </span>
-              <span className="text-[10px] font-mono uppercase bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold">
+              <span className="w-fit text-[10px] font-mono uppercase bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold whitespace-nowrap shrink-0">
                 3–4 Hrs Drained Daily
               </span>
             </div>
@@ -967,12 +967,12 @@ const HowAutomationHelpsPage: React.FC<{ onOpenAudit?: () => void }> = () => {
         {/* Right: The HIT Automated Flow */}
         <div className="bg-emerald-50 border-2 border-emerald-200/80 rounded-3xl p-5 sm:p-6 flex flex-col justify-between shadow-xs">
           <div>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono font-black text-emerald-800 uppercase tracking-wider flex items-center gap-1.5">
-                <Zap className="w-4 h-4 text-emerald-600 fill-current" />
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-3">
+              <span className="text-xs font-mono font-black text-emerald-800 uppercase tracking-wider flex items-center gap-1.5 whitespace-nowrap">
+                <Zap className="w-4 h-4 text-emerald-600 fill-current shrink-0" />
                 THE HIT AUTOMATED FLOW
               </span>
-              <span className="text-[10px] font-mono uppercase bg-[#EEFF41] text-slate-950 px-2 py-0.5 rounded font-black shadow-2xs">
+              <span className="w-fit text-[10px] font-mono uppercase bg-[#EEFF41] text-slate-950 px-2 py-0.5 rounded font-black shadow-2xs whitespace-nowrap shrink-0">
                 Under 30 Seconds
               </span>
             </div>
@@ -1144,11 +1144,11 @@ const CustomSolutionsPage: React.FC<{ onOpenAudit: () => void }> = ({ onOpenAudi
       {/* 3. Action Callout Box */}
       <div className="bg-slate-900 text-white rounded-3xl p-5 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-mono font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#EEFF41] text-slate-900">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2.5 mb-2">
+            <span className="w-fit text-[10px] font-mono font-black uppercase tracking-wider px-2.5 py-1 rounded-md bg-[#EEFF41] text-slate-900 whitespace-nowrap shrink-0">
               LOW-RISK FIRST STEP
             </span>
-            <span className="text-xs text-slate-400 font-mono">Diagnosis Before Prescription</span>
+            <span className="text-xs text-slate-400 font-mono whitespace-nowrap">Diagnosis Before Prescription</span>
           </div>
           <h4 className="text-lg sm:text-xl font-black text-white tracking-tight">
             See exactly what AI can automate in your business

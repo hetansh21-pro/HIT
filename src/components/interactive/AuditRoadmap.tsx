@@ -58,11 +58,11 @@ export const AuditRoadmap: React.FC<AuditRoadmapProps> = ({ onOpenAuditModal }) 
     <div className="w-full bg-[#0E1424]/90 border border-slate-800 rounded-3xl p-5 sm:p-7 backdrop-blur-xl">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-800">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 mb-2">
+            <span className="w-fit px-2.5 py-0.5 text-xs font-semibold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 whitespace-nowrap shrink-0">
               Low-Risk First Step
             </span>
-            <span className="text-xs text-slate-400">Diagnosis Before Prescription</span>
+            <span className="text-xs text-slate-400 whitespace-nowrap">Diagnosis Before Prescription</span>
           </div>
           <h4 className="text-xl sm:text-2xl font-bold text-white">
             What Happens in the AI Business Audit?

@@ -27,11 +27,11 @@ export const QuickActionModule: React.FC<QuickActionModuleProps> = ({ onOpenAudi
   return (
     <div className="w-full bg-[#0E1424]/90 border border-slate-800 rounded-3xl p-5 sm:p-7 backdrop-blur-xl">
       <div className="mb-6 pb-4 border-b border-slate-800">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-[#FF1E42]/20 text-[#FF5E78] border border-[#FF1E42]/30">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 mb-2">
+          <span className="w-fit px-2.5 py-0.5 text-xs font-semibold rounded-full bg-[#FF1E42]/20 text-[#FF5E78] border border-[#FF1E42]/30 whitespace-nowrap shrink-0">
             Immediate Next Steps
           </span>
-          <span className="text-xs text-slate-400">Zero Risk • 48-Hour Turnaround</span>
+          <span className="text-xs text-slate-400 whitespace-nowrap">Zero Risk • 48-Hour Turnaround</span>
         </div>
         <h4 className="text-xl sm:text-2xl font-bold text-white">
           Ready to Stop Paying for Repetitive Manual Work?

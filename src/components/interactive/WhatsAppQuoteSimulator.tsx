@@ -167,12 +167,12 @@ export const WhatsAppQuoteSimulator: React.FC = () => {
         {/* Right: AI Output & Owner Approval Deck */}
         <div className="lg:col-span-6 flex flex-col gap-4">
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-[#FF1E42]" />
-                Human-in-the-Loop Safeguard
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5 whitespace-nowrap">
+                <ShieldCheck className="w-4 h-4 text-[#FF1E42] shrink-0" />
+                <span>Human-in-the-Loop Safeguard</span>
               </span>
-              <span className="text-[11px] font-mono font-bold px-2 py-0.5 bg-red-100 text-[#FF1E42] rounded">
+              <span className="w-fit text-[11px] font-mono font-bold px-2.5 py-0.5 bg-red-100 text-[#FF1E42] rounded whitespace-nowrap shrink-0">
                 Zero Risk
               </span>
             </div>
