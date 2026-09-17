@@ -110,13 +110,15 @@ export const Screen2Questions: React.FC<Screen2QuestionsProps> = ({
             <svg
               viewBox="0 0 32 32"
               fill="none"
-              className="w-8 h-8 text-[#FF1E42] stroke-current -rotate-12 translate-y-1 shrink-0"
+              className="w-8 h-8 text-[#FF1E42] stroke-current -rotate-12 translate-y-1 shrink-0 overflow-visible"
             >
               <path
                 d="M 6 4 C 18 6, 24 16, 20 26 M 15 22 L 20 26 L 25 21"
                 strokeWidth="2.2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                pathLength="1"
+                className="animate-draw-arrow-svg"
               />
             </svg>
           </div>

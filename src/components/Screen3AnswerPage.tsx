@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { QuestionItem, QUICK_QUESTIONS } from '../data/servicesData';
 import { HitLogo } from './HitLogo';
 import { WhatsAppQuoteSimulator } from './interactive/WhatsAppQuoteSimulator';
@@ -25,6 +25,7 @@ import {
   Bot,
   Check,
   Timer,
+  ChevronDown,
 } from 'lucide-react';
 import { BrandGeometricAccents } from './BrandGeometricAccents';
 import { HandArrowDown, HandUnderline, HandCircle, HandArrowLeft, HandArrowRight } from './HandDrawnElements';
@@ -91,6 +92,28 @@ export const Screen3AnswerPage: React.FC<Screen3AnswerPageProps> = ({
     window.open(`https://wa.me/?text=${msg}`, '_blank');
   };
 
+  // Dynamic visibility for footer action buttons:
+  // If a button is already present in the main content of the current page, do NOT duplicate it in the footer.
+  // If it is NOT in the main content of the current page, show it in the footer.
+  const [isStage1AuditVisible, setIsStage1AuditVisible] = useState<boolean>(true);
+
+  useEffect(() => {
+    setIsStage1AuditVisible(true);
+  }, [question.id]);
+
+  const contentHasWhatsApp =
+    question.componentType === 'what_hit_does' ||
+    question.componentType === 'how_to_start';
+
+  const contentHasAudit =
+    question.componentType === 'what_hit_does' ||
+    question.componentType === 'custom_solutions' ||
+    question.componentType === 'how_to_start' ||
+    (question.componentType === 'services_provided' && isStage1AuditVisible);
+
+  const showWhatsAppInFooter = !contentHasWhatsApp;
+  const showAuditInFooter = !contentHasAudit;
+
   const getQuestionIcon = (iconName: string) => {
     const cls = "w-7 h-7 text-[#FF1E42]";
     switch (iconName) {
@@ -148,8 +171,8 @@ export const Screen3AnswerPage: React.FC<Screen3AnswerPageProps> = ({
           <HitLogo size="sm" />
         </button>
 
-        {/* Question Counter */}
-        <div className="flex items-center gap-1 text-[11px] sm:text-xs font-mono text-slate-400 select-none">
+        {/* Question Counter (Desktop Only - on mobile, navigation is at the bottom) */}
+        <div className="hidden sm:flex items-center gap-1 text-xs font-mono text-slate-400 select-none">
           {prevQuestion ? (
             <button
               onClick={() => {
@@ -195,6 +218,9 @@ export const Screen3AnswerPage: React.FC<Screen3AnswerPageProps> = ({
             <span className="w-4 h-4 inline-block"></span>
           )}
         </div>
+
+        {/* Mobile Header Right Balance Spacer */}
+        <div className="w-[34px] sm:hidden pointer-events-none" aria-hidden="true" />
       </header>
 
       {/* Main Page Content - Smoothly animates on question change */}
@@ -235,7 +261,10 @@ export const Screen3AnswerPage: React.FC<Screen3AnswerPageProps> = ({
           )}
 
           {question.componentType === 'services_provided' && (
-            <ServicesProvidedPage onOpenAudit={onOpenAudit} />
+            <ServicesProvidedPage
+              onOpenAudit={onOpenAudit}
+              onAuditVisibleChange={setIsStage1AuditVisible}
+            />
           )}
 
           {question.componentType === 'how_automation_helps' && (
@@ -257,7 +286,7 @@ export const Screen3AnswerPage: React.FC<Screen3AnswerPageProps> = ({
       </main>
 
       {/* Footer Navigation Bar */}
-      <footer className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 border-t border-slate-100">
+      <footer className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-24 sm:pb-8 border-t border-slate-100">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
           <button
             onClick={() => {
@@ -270,26 +299,32 @@ export const Screen3AnswerPage: React.FC<Screen3AnswerPageProps> = ({
             <span>Back to All Questions</span>
           </button>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
-            <button
-              onClick={handleWhatsApp}
-              className="px-4 py-3 rounded-xl bg-emerald-50 text-emerald-800 font-bold text-xs sm:text-sm hover:bg-emerald-100 border border-emerald-200 transition-colors flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <MessageSquare className="w-4 h-4 text-emerald-600" />
-              <span>Ask on WhatsApp</span>
-            </button>
+          {(showWhatsAppInFooter || showAuditInFooter) && (
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
+              {showWhatsAppInFooter && (
+                <button
+                  onClick={handleWhatsApp}
+                  className="px-4 py-3 rounded-xl bg-emerald-50 text-emerald-800 font-bold text-xs sm:text-sm hover:bg-emerald-100 border border-emerald-200 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <MessageSquare className="w-4 h-4 text-emerald-600" />
+                  <span>Ask on WhatsApp</span>
+                </button>
+              )}
 
-            <button
-              onClick={() => {
-                sound.playClick();
-                onOpenAudit();
-              }}
-              className="px-5 py-3 rounded-xl bg-[#FF1E42] hover:bg-[#E01536] text-white font-bold text-xs sm:text-sm shadow-md shadow-red-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <Calendar className="w-4 h-4" />
-              <span>Book 1-Day Audit</span>
-            </button>
-          </div>
+              {showAuditInFooter && (
+                <button
+                  onClick={() => {
+                    sound.playClick();
+                    onOpenAudit();
+                  }}
+                  className="px-5 py-3 rounded-xl bg-[#FF1E42] hover:bg-[#E01536] text-white font-bold text-xs sm:text-sm shadow-md shadow-red-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Calendar className="w-4 h-4" />
+                  <span>Book 1-Day Audit</span>
+                </button>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="flex items-center justify-between text-xs text-slate-400 pt-5 mt-5 border-t border-slate-100">
@@ -297,6 +332,75 @@ export const Screen3AnswerPage: React.FC<Screen3AnswerPageProps> = ({
           <div className="w-7 h-1.5 rounded-full bg-[#DFFF00]"></div>
         </div>
       </footer>
+
+      {/* Floating Bottom Question Switcher (Mobile Only for easy thumb access) */}
+      <aside
+        aria-label="Mobile question navigation"
+        className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 sm:hidden flex items-center justify-center pointer-events-none"
+      >
+        <div className="pointer-events-auto flex items-center gap-2.5 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-full border-2 border-slate-200 shadow-xl shadow-slate-900/15 text-slate-800">
+          {prevQuestion ? (
+            <button
+              onClick={() => {
+                sound.playClick();
+                onSelectQuestion(prevQuestion);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 active:scale-90 text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-2xs"
+              title={`Previous: 0${prevQuestion.number} - ${prevQuestion.subtitle}`}
+              aria-label="Previous Question"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                sound.playClick();
+                onBackToQuestions();
+              }}
+              className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 active:scale-90 text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-2xs"
+              title="Back to All Questions"
+              aria-label="Back to All Questions"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+          )}
+
+          <div className="flex items-center gap-1 font-mono select-none px-1 text-xs">
+            <span className="font-extrabold text-slate-900 tracking-wider">
+              0{question.number}
+            </span>
+            <span className="text-slate-300 font-light">/</span>
+            <span className="font-semibold text-slate-400 tracking-wider">
+              06
+            </span>
+          </div>
+
+          {nextQuestion ? (
+            <button
+              onClick={() => {
+                sound.playClick();
+                onSelectQuestion(nextQuestion);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="w-8 h-8 rounded-full bg-[#FF1E42] hover:bg-[#E01536] active:scale-90 text-white flex items-center justify-center transition-all cursor-pointer shadow-md shadow-red-500/25"
+              title={`Next: 0${nextQuestion.number} - ${nextQuestion.subtitle}`}
+              aria-label="Next Question"
+            >
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          ) : (
+            <button
+              disabled
+              className="w-8 h-8 rounded-full bg-slate-100 text-slate-300 flex items-center justify-center cursor-not-allowed opacity-50"
+              title="No more questions"
+              aria-label="No more questions"
+            >
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+      </aside>
     </div>
   );
 };
@@ -470,8 +574,15 @@ const WhatHitDoesPage: React.FC<{ onOpenAudit: () => void; onWhatsApp: () => voi
 /* =========================================================================
    2. WHICH SERVICES DO YOU PROVIDE PAGE
    ========================================================================= */
-const ServicesProvidedPage: React.FC<{ onOpenAudit: () => void }> = ({ onOpenAudit }) => {
-  const [activeTab, setActiveTab] = useState(0);
+const ServicesProvidedPage: React.FC<{
+  onOpenAudit: () => void;
+  onAuditVisibleChange?: (visible: boolean) => void;
+}> = ({ onOpenAudit, onAuditVisibleChange }) => {
+  const [activeTab, setActiveTab] = useState<number | null>(0);
+
+  useEffect(() => {
+    onAuditVisibleChange?.(activeTab === 0);
+  }, [activeTab, onAuditVisibleChange]);
 
   const pillars = [
     {
@@ -482,7 +593,7 @@ const ServicesProvidedPage: React.FC<{ onOpenAudit: () => void }> = ({ onOpenAud
       tagline: '1-Day Walkthrough • Diagnosis Before Prescription',
       accentColor: '#FF1E42',
       badgeBg: 'bg-red-50 text-red-600 border-red-200',
-      activeTabStyle: 'border-[#FF1E42] bg-red-50 shadow-md ring-2 ring-red-100',
+      activeTabStyle: 'border-[#FF1E42] bg-red-50/70 shadow-md ring-2 ring-red-100',
       desc: 'We spend 1 full day mapping every manual task, Excel spreadsheet bottleneck, and dropped WhatsApp inquiry in your business. You get an executive AI Opportunity Report.',
       cards: [
         {
@@ -519,7 +630,7 @@ const ServicesProvidedPage: React.FC<{ onOpenAudit: () => void }> = ({ onOpenAud
       tagline: 'Custom Central Engine • Built Around Your Habits',
       accentColor: '#2563EB',
       badgeBg: 'bg-blue-50 text-blue-700 border-blue-200',
-      activeTabStyle: 'border-blue-600 bg-blue-50 shadow-md ring-2 ring-blue-100',
+      activeTabStyle: 'border-blue-600 bg-blue-50/70 shadow-md ring-2 ring-blue-100',
       desc: 'A tailored central operating system replacing messy Excel sheets and scattered WhatsApp chats: CRM, inventory tracking, order management, and executive mobile views.',
       cards: [
         {
@@ -556,7 +667,7 @@ const ServicesProvidedPage: React.FC<{ onOpenAudit: () => void }> = ({ onOpenAud
       tagline: 'Autonomous Agents • Plugs Into Daily Operations',
       accentColor: '#059669',
       badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-      activeTabStyle: 'border-emerald-600 bg-emerald-50 shadow-md ring-2 ring-emerald-100',
+      activeTabStyle: 'border-emerald-600 bg-emerald-50/70 shadow-md ring-2 ring-emerald-100',
       desc: 'Dedicated, narrow autonomous agents that do the heavy lifting: instant quotations, automatic sales follow-ups, invoice data extraction, and 24/7 dealer rate assistance.',
       cards: [
         {
@@ -587,107 +698,224 @@ const ServicesProvidedPage: React.FC<{ onOpenAudit: () => void }> = ({ onOpenAud
     },
   ];
 
-  const current = pillars[activeTab];
-  const TabIcon = current.icon;
+  const desktopActive = activeTab === null ? 0 : activeTab;
+  const current = pillars[desktopActive];
 
   return (
     <div className="space-y-6">
-      {/* 3 Step Tabs */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      {/* Mobile Accordion View (< sm): Expand in-place on click */}
+      <div className="sm:hidden space-y-3">
         {pillars.map((p, idx) => {
           const Icon = p.icon;
-          const isActive = activeTab === idx;
+          const isExpanded = activeTab === idx;
           return (
-            <button
+            <div
               key={p.step}
-              onClick={() => {
-                sound.playClick();
-                setActiveTab(idx);
-              }}
-              className={`p-3.5 sm:p-4 rounded-2xl text-left border-2 transition-all cursor-pointer ${
-                isActive
-                  ? p.activeTabStyle
-                  : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+              className={`rounded-3xl border-2 transition-all duration-300 overflow-hidden ${
+                isExpanded
+                  ? `${p.activeTabStyle} bg-white shadow-md`
+                  : 'bg-white border-slate-200 hover:border-slate-300 shadow-2xs'
               }`}
             >
-              <div className="flex items-center justify-between mb-1.5">
-                <div className="flex items-center gap-2">
-                  <span
-                    className="text-xs font-mono font-black"
-                    style={{ color: p.accentColor }}
-                  >
-                    STAGE {p.step}
-                  </span>
-                  <Icon className="w-3.5 h-3.5 text-slate-400" />
+              {/* Accordion Header Button */}
+              <button
+                type="button"
+                onClick={() => {
+                  sound.playClick();
+                  setActiveTab(isExpanded ? null : idx);
+                }}
+                className="w-full p-4 text-left flex items-center justify-between cursor-pointer select-none transition-colors"
+                aria-expanded={isExpanded}
+              >
+                <div className="flex-1 pr-3">
+                  <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                    <span
+                      className="text-xs font-mono font-black tracking-wider"
+                      style={{ color: p.accentColor }}
+                    >
+                      STAGE {p.step}
+                    </span>
+                    <Icon className="w-3.5 h-3.5 text-slate-400" />
+                    <span className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border ${p.badgeBg}`}>
+                      {p.role}
+                    </span>
+                  </div>
+                  <h4 className="text-base font-black text-slate-900 leading-snug">
+                    {p.title}
+                  </h4>
                 </div>
-                <span className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border ${p.badgeBg}`}>
-                  {p.role}
-                </span>
+
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 shrink-0 ${
+                    isExpanded
+                      ? 'bg-slate-900 text-white rotate-180 shadow-xs'
+                      : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                  }`}
+                >
+                  <ChevronDown className="w-4 h-4 transition-transform duration-300" />
+                </div>
+              </button>
+
+              {/* Accordion Expandable Body (Smooth Grid Animation) */}
+              <div
+                className={`grid transition-all duration-300 ease-out ${
+                  isExpanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="px-4 pb-5 pt-2 border-t border-slate-100/90 space-y-4">
+                    {/* Tagline & Description */}
+                    <div className="space-y-1">
+                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
+                        {p.tagline}
+                      </span>
+                      <p className="text-xs text-slate-700 leading-relaxed">
+                        {p.desc}
+                      </p>
+                    </div>
+
+                    {/* Book Audit Button if Stage 01 */}
+                    {idx === 0 && (
+                      <button
+                        onClick={onOpenAudit}
+                        className="w-full bg-[#FF1E42] hover:bg-[#E01536] text-white py-3 px-4 rounded-xl text-xs font-bold shadow-md shadow-red-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+                      >
+                        <Calendar className="w-4 h-4" />
+                        <span>Book 1-Day Audit Form</span>
+                      </button>
+                    )}
+
+                    {/* 4 Feature Points with Rich Badges */}
+                    <div className="space-y-2.5 pt-1">
+                      {p.cards.map((c, i) => (
+                        <div
+                          key={i}
+                          className="bg-slate-50 border border-slate-200/90 p-3.5 rounded-2xl shadow-2xs flex flex-col justify-between"
+                        >
+                          <div>
+                            <div className="flex items-center justify-between mb-1.5 gap-2">
+                              <span className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                {c.title}
+                              </span>
+                              <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md shrink-0 ${c.badgeColor}`}>
+                                {c.badge}
+                              </span>
+                            </div>
+                            <p className="text-xs text-slate-600 leading-relaxed pl-5.5">
+                              {c.desc}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <p className="text-sm sm:text-base font-black text-slate-900 leading-tight">{p.title}</p>
-            </button>
+            </div>
           );
         })}
       </div>
 
-      {/* Selected Pillar Card */}
-      <div className="bg-white border-2 border-slate-200 rounded-3xl p-5 sm:p-8 shadow-xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 sm:pb-5 border-b border-slate-100 mb-5 sm:mb-6 gap-3 sm:gap-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <span
-                className="text-xs font-mono font-black uppercase tracking-wider"
-                style={{ color: current.accentColor }}
+      {/* Desktop Tabs View (>= sm) */}
+      <div className="hidden sm:block space-y-6">
+        {/* 3 Step Tabs */}
+        <div className="grid grid-cols-3 gap-3">
+          {pillars.map((p, idx) => {
+            const Icon = p.icon;
+            const isActive = desktopActive === idx;
+            return (
+              <button
+                key={p.step}
+                onClick={() => {
+                  sound.playClick();
+                  setActiveTab(idx);
+                }}
+                className={`p-3.5 sm:p-4 rounded-2xl text-left border-2 transition-all cursor-pointer ${
+                  isActive
+                    ? p.activeTabStyle
+                    : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                }`}
               >
-                STAGE {current.step} • {current.role}
-              </span>
-              <span className="text-xs text-slate-400 font-mono hidden sm:inline">
-                | {current.tagline}
-              </span>
-            </div>
-            <h3 className="text-xl sm:text-3xl font-black text-slate-900">
-              {current.title}
-            </h3>
-          </div>
-
-          {activeTab === 0 && (
-            <button
-              onClick={onOpenAudit}
-              className="bg-[#FF1E42] hover:bg-[#E01536] text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-md shadow-red-500/20 transition-all cursor-pointer self-start sm:self-auto flex items-center gap-2"
-            >
-              <Calendar className="w-4 h-4" />
-              <span>Book 1-Day Audit</span>
-            </button>
-          )}
-        </div>
-
-        <p className="text-xs sm:text-base text-slate-700 leading-relaxed mb-5 sm:mb-6 max-w-3xl">
-          {current.desc}
-        </p>
-
-        {/* 4 Feature Points with Rich Badges */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
-          {current.cards.map((c, i) => (
-            <div
-              key={i}
-              className="bg-slate-50 border border-slate-200/90 hover:border-slate-300 p-3.5 sm:p-4.5 rounded-2xl transition-all shadow-xs flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    {c.title}
-                  </span>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${c.badgeColor}`}>
-                    {c.badge}
+                <div className="flex items-center justify-between mb-1.5">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="text-xs font-mono font-black"
+                      style={{ color: p.accentColor }}
+                    >
+                      STAGE {p.step}
+                    </span>
+                    <Icon className="w-3.5 h-3.5 text-slate-400" />
+                  </div>
+                  <span className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border ${p.badgeBg}`}>
+                    {p.role}
                   </span>
                 </div>
-                <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed pl-6">
-                  {c.desc}
-                </p>
+                <p className="text-sm sm:text-base font-black text-slate-900 leading-tight">{p.title}</p>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Selected Pillar Card */}
+        <div className="bg-white border-2 border-slate-200 rounded-3xl p-5 sm:p-8 shadow-xs animate-fade-in">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 sm:pb-5 border-b border-slate-100 mb-5 sm:mb-6 gap-3 sm:gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span
+                  className="text-xs font-mono font-black uppercase tracking-wider"
+                  style={{ color: current.accentColor }}
+                >
+                  STAGE {current.step} • {current.role}
+                </span>
+                <span className="text-xs text-slate-400 font-mono hidden sm:inline">
+                  | {current.tagline}
+                </span>
               </div>
+              <h3 className="text-xl sm:text-3xl font-black text-slate-900">
+                {current.title}
+              </h3>
             </div>
-          ))}
+
+            {desktopActive === 0 && (
+              <button
+                onClick={onOpenAudit}
+                className="bg-[#FF1E42] hover:bg-[#E01536] text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-md shadow-red-500/20 transition-all cursor-pointer self-start sm:self-auto flex items-center gap-2"
+              >
+                <Calendar className="w-4 h-4" />
+                <span>Book 1-Day Audit</span>
+              </button>
+            )}
+          </div>
+
+          <p className="text-xs sm:text-base text-slate-700 leading-relaxed mb-5 sm:mb-6 max-w-3xl">
+            {current.desc}
+          </p>
+
+          {/* 4 Feature Points with Rich Badges */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
+            {current.cards.map((c, i) => (
+              <div
+                key={i}
+                className="bg-slate-50 border border-slate-200/90 hover:border-slate-300 p-3.5 sm:p-4.5 rounded-2xl transition-all shadow-xs flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                      {c.title}
+                    </span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${c.badgeColor}`}>
+                      {c.badge}
+                    </span>
+                  </div>
+                  <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed pl-6">
+                    {c.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -34,7 +34,7 @@ export const BrandGeometricAccents: React.FC<BrandGeometricAccentsProps> = ({
 
       {/* 2. Right Red Tilted Square / Diamond (Matching media_1789568773550.png) */}
       <div
-        className={`absolute right-0 top-[340px] sm:top-[380px] w-36 h-36 sm:w-56 sm:h-56 translate-x-[36%] rotate-[38deg] bg-[#FE1743] pointer-events-none ${
+        className={`absolute right-0 bottom-14 sm:bottom-auto sm:top-[380px] w-36 h-36 sm:w-56 sm:h-56 translate-x-[36%] rotate-[38deg] bg-[#FE1743] pointer-events-none ${
           animateIntro ? 'animate-red-shape-intro' : ''
         }`}
         style={{

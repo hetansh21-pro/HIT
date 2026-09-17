@@ -143,7 +143,7 @@ export const App: React.FC = () => {
 
       {/* SCREEN 3: Dedicated Full-Page Answer Screen (NO POPUP!) */}
       {activeScreen === 'screen3' && activeQuestion && (
-        <div key="screen3" className="animate-screen-enter">
+        <div key="screen3" className="animate-fade-in">
           <Screen3AnswerPage
             question={activeQuestion}
             onBackToQuestions={handleBackToQuestions}
