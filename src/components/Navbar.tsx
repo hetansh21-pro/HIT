@@ -24,7 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 w-full bg-[#070B14]/90 backdrop-blur-xl border-b border-slate-800/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between relative">
         {/* Left: Brand / Return to Intro */}
         <div className="flex items-center gap-3 sm:gap-4">
           <button
@@ -59,6 +59,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Full Intro</span>
           </button>
+        </div>
+
+        {/* Center Name & Subtitle Badge */}
+        <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-[#DFFF00]/40 shadow-lg shadow-[#DFFF00]/5 backdrop-blur-md">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#DFFF00] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#DFFF00]"></span>
+          </span>
+          <span className="text-xs font-mono font-bold tracking-wider text-[#DFFF00]">HETANSH</span>
+          <span className="text-slate-600">•</span>
+          <span className="text-[11px] font-mono font-semibold tracking-wider text-slate-300">PROCESS AUTOMATION</span>
         </div>
 
         {/* Right: Actions */}

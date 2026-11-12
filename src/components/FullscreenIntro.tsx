@@ -61,18 +61,29 @@ export const FullscreenIntro: React.FC<FullscreenIntroProps> = ({ onEnter }) => 
         ></div>
       </div>
 
-      {/* Top Bar: Subtitle & Sound Toggle */}
-      <div className="w-full max-w-5xl flex items-center justify-between z-10">
+      {/* Top Bar: Subtitle, Hetansh Badge & Sound Toggle */}
+      <div className="w-full max-w-5xl flex items-center justify-between z-10 relative">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-[#FF1E42] animate-ping"></span>
-          <span className="text-xs font-mono font-semibold tracking-widest uppercase text-slate-400">
+          <span className="text-xs font-mono font-semibold tracking-widest uppercase text-slate-400 hidden sm:inline">
             HIT AI SYSTEMS • 2026
           </span>
         </div>
 
+        {/* Center Name Badge */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-[#DFFF00]/40 shadow-lg shadow-[#DFFF00]/5 backdrop-blur-md">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#DFFF00] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#DFFF00]"></span>
+          </span>
+          <span className="text-xs font-mono font-bold tracking-wider text-[#DFFF00]">HETANSH</span>
+          <span className="text-slate-600">•</span>
+          <span className="text-[11px] font-mono font-semibold tracking-wider text-slate-300">PROCESS AUTOMATION</span>
+        </div>
+
         <button
           onClick={toggleSound}
-          className="p-2.5 rounded-full bg-slate-900/80 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-colors backdrop-blur-md"
+          className="p-2.5 rounded-full bg-slate-900/80 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-colors backdrop-blur-md ml-auto"
           title={soundActive ? 'Mute sound' : 'Enable sound'}
         >
           {soundActive ? <Volume2 className="w-4 h-4 text-[#DFFF00]" /> : <VolumeX className="w-4 h-4" />}
